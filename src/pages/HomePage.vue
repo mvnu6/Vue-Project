@@ -1,4 +1,5 @@
 <template>
+    <HeaderComponent />
     <main>
       <h1>{{ welcomeMessage || 'Home Page' }}</h1>
       <nav>
@@ -13,6 +14,7 @@
   <script lang="ts" setup>
   import { computed } from 'vue'
   import { useAuthStore } from '../stores/auth'
+  import HeaderComponent from '../components/HeaderComponent.vue'; // Importez le composant Header
   
   const authStore = useAuthStore()
   const welcomeMessage = computed(() => authStore.welcomeMessage)
@@ -28,6 +30,7 @@ main {
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 h1 {

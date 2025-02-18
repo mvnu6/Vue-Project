@@ -1,10 +1,13 @@
 <template>
+    <HeaderComponent />
     <main>
         <h1>Page de Connexion</h1>
         <section>
             <form @submit.prevent="handleLogin">
                 <section>
                     <FieldComponent class="input" v-for="field in fields" :key="field.id" :data="field" />
+                    <p v-if="emailError" class="error-message">L'email doit être valide.</p>
+                    <p v-if="passwordError" class="error-message">Le mot de passe doit contenir au moins 6 caractères.</p>
                 </section>
                 <section>
                     <ButtonComponent class="button" v-for="button in buttons" :key="button.id" :data="button" />
@@ -23,6 +26,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import FieldComponent from '../components/FieldComponent.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
+import HeaderComponent from '../components/HeaderComponent.vue';
 
 const router = useRouter();
 
@@ -72,38 +76,19 @@ const validateFields = () => {
     return !emailError.value && !passwordError.value;
 };
 
-const handleLogin = async () => {
+const handleLogin = () => {
     if (!validateFields()) {
         errorMessage.value = 'Veuillez corriger les erreurs dans le formulaire.';
         return;
     }
 
-    try {
-        errorMessage.value = ''; // Réinitialiser le message d'erreur
-        // Exemple d'appel API pour la connexion
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email.value,
-                password: password.value
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error('Erreur de connexion');
-        }
-
-        const data = await response.json();
-        console.log('Connexion réussie', data);
-
-        // Redirection après connexion réussie
+    if (email.value === 'test@example.com' && password.value === 'password123') {
+        console.log('Connexion réussie');
+        localStorage.setItem('isLoggedIn', 'true');
         router.push('/');
-    } catch (error) {
+    } else {
         errorMessage.value = 'Erreur lors de la tentative de connexion. Veuillez vérifier vos identifiants.';
-        console.error('Erreur lors de la tentative de connexion', error);
+        console.error('Erreur lors de la tentative de connexion');
     }
 };
 </script>
@@ -114,6 +99,7 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    margin-top: 20px;
 }
 
 h1 {
@@ -134,7 +120,16 @@ form {
 }
 
 .button {
-    margin-right: 10px;
+    border-radius: 12px;
+    padding: 8px 16px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1a252f;
 }
 
 .register-section {

@@ -1,4 +1,5 @@
 <template>
+    <HeaderComponent />
     <main>
         <h1>Page d'Inscription</h1>
         <section>
@@ -23,6 +24,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import FieldComponent from '../components/FieldComponent.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
+import HeaderComponent from '../components/HeaderComponent.vue';
 
 const router = useRouter();
 
@@ -85,8 +87,7 @@ const handleRegister = async (event: Event) => {
     }
 
     try {
-        errorMessage.value = ''; // Réinitialiser le message d'erreur
-        // Exemple d'appel API pour l'inscription
+        errorMessage.value = '';
         const response = await fetch('/api/register', {
             method: 'POST',
             headers: {
@@ -107,7 +108,6 @@ const handleRegister = async (event: Event) => {
         const data = await response.json();
         console.log('Inscription réussie', data);
 
-        // Redirection après inscription réussie
         router.push('/');
     } catch (error) {
         errorMessage.value = `Erreur lors de la tentative d'inscription: ${error.message}`;
@@ -115,8 +115,8 @@ const handleRegister = async (event: Event) => {
     }
 };
 </script>
+
 <style scoped>
-/* Style général de la page */
 main {
     display: flex;
     flex-direction: column;
@@ -125,18 +125,16 @@ main {
     min-height: 100vh;
     padding: 20px;
     font-family: Arial, sans-serif;
+    margin-top: 20px;
 }
 
-/* Titre de la page */
 h1 {
     font-size: 2rem;
     color: #333;
     margin-bottom: 20px;
 }
 
-/* Conteneur du formulaire */
 form {
-   
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -144,12 +142,10 @@ form {
     max-width: 400px;
 }
 
-/* Section des champs de formulaire */
 form section {
     margin-bottom: 15px;
 }
 
-/* Style des champs de formulaire */
 .input {
     width: 100%;
     padding: 10px;
@@ -165,42 +161,25 @@ form section {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Section des boutons */
 form section:last-of-type {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
 
-/* Style des boutons */
 .button {
-    padding: 10px 20px;
+    border-radius: 12px;
+    padding: 8px 16px;
+    background-color: #2c3e50;
+    color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
+.button:hover {
+    background-color: #1a252f;
 }
 
-.button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-.button[type="reset"] {
-    background-color: #6c757d;
-    color: #fff;
-}
-
-.button[type="reset"]:hover {
-    background-color: #5a6268;
-}
-
-/* Section "Déjà un compte ?" */
 .login-section {
     margin-top: 20px;
     text-align: center;
