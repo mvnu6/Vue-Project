@@ -12,13 +12,46 @@
   
   <script lang="ts" setup>
   import { computed } from 'vue'
-  import { useAuthStore } from './stores/auth'
+  import { useAuthStore } from '../stores/auth'
   
   const authStore = useAuthStore()
   const welcomeMessage = computed(() => authStore.welcomeMessage)
   const isAuthenticated = computed(() => authStore.isAuthenticated)
   </script>
   
-  <style scoped>
+<style scoped>
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #333;
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+}
+
+router-link {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+router-link:hover {
+  text-decoration: underline;
+}
+
+router-link:active {
+  color: #0056b3;
+}
 </style>
-  

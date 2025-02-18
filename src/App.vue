@@ -1,13 +1,7 @@
-<script setup lang="ts">
-import Header from './layouts/HeaderLayout.vue';
-
-</script>
-
 <template>
-  <Header/>
-  <router-view></router-view>
+  <div>
+    <nav>
+    </nav>
+    <router-view /> 
+  </div>
 </template>
-
-<style scoped>
-
-</style>

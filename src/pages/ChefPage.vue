@@ -21,7 +21,7 @@
   <script lang="ts" setup>
   import { ref, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
-  import { useCartStore } from './stores/cart'
+  import { useCartStore } from '../stores/cart'
   
   const route = useRoute()
   const chefId = Number(route.params.id)

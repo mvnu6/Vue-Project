@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <!-- <header>
         <nav>
         <ul>
             <li>
@@ -20,24 +20,24 @@
         </ul>
         </nav>
     </header>
-    
+     -->
     </template>
     
     
     <script lang="ts" setup>
-    import { computed } from 'vue';
-    import {useRoute, useRouter} from 'vue-router';
-    import { useAuthStore } from '../stores/auth';
-    const route = useRoute();
-    const router = useRouter();
-    const isLoginPage = computed(() => route.path === '/login')
+    // import { computed } from 'vue';
+    // import {useRoute, useRouter} from 'vue-router';
+    // import { useAuthStore } from '../stores/auth';
+    // const route = useRoute();
+    // const router = useRouter();
+    // const isLoginPage = computed(() => route.path === '/login')
     
-    const store = useAuthStore() as any;
+    // const store = useAuthStore() as any;
     
     
     
-    const handleDeconnexion = () => {
-        router.push('/')
-        store.isLogin.value = false;
-    }
+    // const handleDeconnexion = () => {
+    //     router.push('/')
+    //     store.isLogin.value = false;
+    // }
     </script>

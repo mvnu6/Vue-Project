@@ -18,7 +18,7 @@
   
   <script lang="ts" setup>
   import { computed } from 'vue'
-  import { useCartStore } from './stores/panier'
+  import { useCartStore } from '../stores/cart'
   
   const cartStore = useCartStore()
   const cartItems = computed(() => cartStore.items)

@@ -1,18 +1,26 @@
 <template>
-    <main>
-      <h1 v-if="welcomeMessage">{{ welcomeMessage }}</h1>
-       <h1 v-else >Home Page</h1>
-      </main>
-  </template>
-  
-  <script lang="ts" setup>
-  import { useAuthStore } from '../stores/auth.ts';
-  import { computed } from 'vue';
-  
-  const authStore = useAuthStore();
-  const welcomeMessage = computed(() => authStore.WelcomeMessage)
-  </script>
-  
-  <style>
-  
-  </style>
+  <input
+    :id="data.id"
+    :type="data.type"
+    :placeholder="data.placeholder"
+    v-model="localValue"
+  />
+</template>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+
+interface FieldData {
+  id: string
+  type: string
+  placeholder: string
+}
+
+const props = defineProps<{ data: FieldData, modelValue?: string }>()
+const emit = defineEmits(['update:modelValue'])
+const localValue = ref(props.modelValue || '')
+
+watch(localValue, (newVal) => {
+  emit('update:modelValue', newVal)
+})
+</script>
